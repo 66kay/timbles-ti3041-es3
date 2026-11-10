@@ -1,0 +1,48 @@
+{% extends "catalogo/base.html" %}
+
+{% block titulo %}Resumen por categoría · Ferretería El Roble{% endblock %}
+
+{% block contenido %}
+<section class="gestion">
+    <div class="contenedor">
+        <nav class="migas" aria-label="Ruta">
+            <a href="{% url 'inicio' %}">Catálogo</a>
+            <span aria-hidden="true">/</span>
+            <span>Reportes</span>
+        </nav>
+
+        <header class="reporte__cabecera">
+            <p class="ficha__etiqueta">Reporte 1</p>
+            <h1>Resumen por categoría</h1>
+            <p>Cantidad de productos, precio promedio y stock total de cada categoría del catálogo.</p>
+        </header>
+
+        <div class="tabla-envoltura">
+            <table class="tabla">
+                <thead>
+                    <tr>
+                        <th scope="col">Categoría</th>
+                        <th scope="col" class="num">Productos</th>
+                        <th scope="col" class="num">Precio promedio</th>
+                        <th scope="col" class="num">Stock total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for fila in resumen %}
+                        <tr>
+                            <th scope="row">
+                                <a href="{% url 'inicio' %}?categoria={{ fila.categoria|urlencode }}#catalogo">{{ fila.categoria }}</a>
+                            </th>
+                            <td class="num">{{ fila.cantidad }}</td>
+                            <td class="num">${{ fila.precio_promedio|floatformat:"0g" }}</td>
+                            <td class="num">{{ fila.stock_total }} u.</td>
+                        </tr>
+                    {% empty %}
+                        <tr><td colspan="4" class="tabla__vacia">No hay productos registrados.</td></tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+{% endblock %}

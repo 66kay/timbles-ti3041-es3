@@ -100,6 +100,46 @@ a { color: inherit; }
 .panel__enviar { width: 100%; margin-top: 4px; }
 .panel__nota { font-size: .8rem; color: var(--gris); margin-top: 12px; }
 
+/* ===== Reportes ===== */
+.reporte__cabecera { margin-bottom: 24px; }
+.reporte__cabecera .ficha__etiqueta { font-size: .76rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--acero); }
+.reporte__cabecera h1 { font-family: var(--titulos); font-weight: 800; font-stretch: 85%; font-size: 2.3rem; line-height: 1.05; margin: 4px 0 8px; }
+.reporte__cabecera p { color: var(--gris); max-width: 60ch; }
+
+.tabla-envoltura {
+    overflow-x: auto; background: var(--blanco);
+    border: 1px solid var(--linea); border-top: 4px solid var(--acero); border-radius: var(--radio);
+}
+.tabla { width: 100%; border-collapse: collapse; font-size: .95rem; min-width: 520px; }
+.tabla th, .tabla td { padding: 13px 18px; text-align: left; border-bottom: 1px solid var(--linea); }
+.tabla thead th {
+    font-size: .78rem; font-weight: 600; letter-spacing: .05em; text-transform: uppercase;
+    color: var(--gris); background: var(--galvanizado);
+}
+.tabla tbody th { font-weight: 600; }
+.tabla tbody th a { color: var(--acero); text-decoration: none; }
+.tabla tbody th a:hover { text-decoration: underline; }
+.tabla tbody tr:hover { background: #F7F9FB; }
+.tabla tbody tr:last-child > * { border-bottom: 0; }
+.tabla .num { text-align: right; font-variant-numeric: tabular-nums; }
+.tabla__vacia { text-align: center; color: var(--gris); padding: 32px; }
+
+.estado { display: inline-block; font-size: .8rem; font-weight: 600; padding: 3px 9px; border-radius: 4px; }
+.estado--bajo { background: var(--amarillo); color: var(--tinta); }
+.estado--agotado { background: var(--tinta); color: var(--blanco); }
+
+/* ===== Menú de secciones ===== */
+.menu { background: var(--acero-oscuro); border-top: 1px solid rgba(255,255,255,.08); }
+.menu__fila { display: flex; gap: 4px; overflow-x: auto; }
+.menu a, .menu button {
+    font: inherit; font-size: .9rem; font-weight: 500; color: #C9D4E0;
+    background: none; border: 0; border-bottom: 3px solid transparent;
+    padding: 11px 14px 9px; text-decoration: none; cursor: pointer; white-space: nowrap;
+}
+.menu a:hover, .menu button:hover { color: var(--blanco); }
+.menu a[aria-current="page"] { color: var(--blanco); border-bottom-color: var(--amarillo); }
+.menu button { margin-left: auto; }
+
 /* ===== Barra de aviso ===== */
 .aviso { background: var(--acero-oscuro); color: #C9D4E0; font-size: .82rem; }
 .aviso__fila { display: flex; justify-content: space-between; gap: 12px; padding-top: 7px; padding-bottom: 7px; }

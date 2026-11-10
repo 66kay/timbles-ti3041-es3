@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..100,500..800&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'catalogo/css/estilos.css' %}?v=4">
+    <link rel="stylesheet" href="{% static 'catalogo/css/estilos.css' %}?v=6">
 </head>
 <body>
     <div class="aviso">
@@ -41,6 +41,14 @@
                 <span>Contacto</span>
             </button>
         </div>
+        <nav class="menu" aria-label="Secciones">
+            <div class="contenedor menu__fila">
+                <a href="{% url 'inicio' %}" {% if request.resolver_match.url_name == 'inicio' %}aria-current="page"{% endif %}>Catálogo</a>
+                <a href="{% url 'reporte_categorias' %}" {% if request.resolver_match.url_name == 'reporte_categorias' %}aria-current="page"{% endif %}>Resumen por categoría</a>
+                <a href="{% url 'reporte_stock' %}" {% if request.resolver_match.url_name == 'reporte_stock' %}aria-current="page"{% endif %}>Stock crítico</a>
+                <button type="button" popovertarget="panel-contacto">Contacto</button>
+            </div>
+        </nav>
     </header>
 
     <!-- Panel de contacto: se abre con cualquier botón que tenga popovertarget="panel-contacto" -->

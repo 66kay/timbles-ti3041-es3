@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from .forms import ProductoForm
 from .models import Producto
 from django.contrib.admin.views.decorators import staff_member_required
-
+from django.db.models import Count, Avg, Sum
 
 def inicio(request):
     productos = Producto.objects.all()
@@ -54,3 +54,15 @@ def eliminar(request, pk):
         producto.delete()
         return redirect("inicio")
     return render(request, "catalogo/confirmar_eliminar.html", {"producto": producto})
+
+def reporte_categorias(request):
+    resumen = Producto.objects.values("categoria").annotate(
+        cantidad=Count("id"),
+        precio_promedio=Avg("precio"),
+        stock_total=Sum("stock"),
+    ).order_by("categoria")
+    return render(request, "catalogo/reporte_categorias.html", {"resumen": resumen})
+
+def reporte_stock_critico(request):
+    productos = Producto.objects.filter(stock__lte=5).order_by("stock", "nombre")
+    return render(request, "catalogo/reporte_stock.html", {"productos": productos})

@@ -1,0 +1,52 @@
+{% extends "catalogo/base.html" %}
+
+{% block titulo %}Stock crítico · Ferretería El Roble{% endblock %}
+
+{% block contenido %}
+<section class="gestion">
+    <div class="contenedor">
+        <nav class="migas" aria-label="Ruta">
+            <a href="{% url 'inicio' %}">Catálogo</a>
+            <span aria-hidden="true">/</span>
+            <span>Reportes</span>
+        </nav>
+
+        <header class="reporte__cabecera">
+            <p class="ficha__etiqueta">Reporte 2</p>
+            <h1>Stock crítico</h1>
+            <p>Productos con 5 unidades o menos, ordenados del que tiene menos stock al que tiene más. Son los que hay que reponer primero.</p>
+        </header>
+
+        <div class="tabla-envoltura">
+            <table class="tabla">
+                <thead>
+                    <tr>
+                        <th scope="col">Producto</th>
+                        <th scope="col">Categoría</th>
+                        <th scope="col" class="num">Precio</th>
+                        <th scope="col" class="num">Stock</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for producto in productos %}
+                        <tr>
+                            <th scope="row">{{ producto.nombre }}</th>
+                            <td>{{ producto.categoria }}</td>
+                            <td class="num">{{ producto.precio_clp }}</td>
+                            <td class="num">
+                                {% if producto.stock == 0 %}
+                                    <span class="estado estado--agotado">Agotado</span>
+                                {% else %}
+                                    <span class="estado estado--bajo">{{ producto.stock }} u.</span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% empty %}
+                        <tr><td colspan="4" class="tabla__vacia">Ningún producto está bajo el umbral. El stock está al día.</td></tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+{% endblock %}
