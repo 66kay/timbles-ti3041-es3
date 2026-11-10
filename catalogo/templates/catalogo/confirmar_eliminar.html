@@ -1,0 +1,45 @@
+{% extends "catalogo/base.html" %}
+
+{% block titulo %}Eliminar producto · Ferretería El Roble{% endblock %}
+
+{% block contenido %}
+<section class="gestion">
+    <div class="contenedor gestion__fila">
+        <nav class="migas" aria-label="Ruta">
+            <a href="{% url 'inicio' %}">Catálogo</a>
+            <span aria-hidden="true">/</span>
+            <span>Eliminar producto</span>
+        </nav>
+
+        <div class="ficha ficha--angosta">
+            <header class="ficha__cabecera">
+                <p class="ficha__etiqueta ficha__etiqueta--peligro">Acción permanente</p>
+                <h1>¿Eliminar este producto?</h1>
+                <p>Se borrará del catálogo y de la base de datos. Esta acción no se puede deshacer.</p>
+            </header>
+
+            <div class="resumen">
+                <div class="resumen__foto">
+                    {% if producto.imagen %}
+                        <img src="{{ producto.imagen }}" alt="{{ producto.nombre }}" width="160" height="120">
+                    {% else %}
+                        <span>Sin foto</span>
+                    {% endif %}
+                </div>
+                <dl class="resumen__datos">
+                    <dt>Producto</dt><dd>{{ producto.nombre }}</dd>
+                    <dt>Categoría</dt><dd>{{ producto.categoria }}</dd>
+                    <dt>Precio</dt><dd>{{ producto.precio_clp }}</dd>
+                    <dt>Stock</dt><dd>{{ producto.stock }} unidad{{ producto.stock|pluralize:"es" }}</dd>
+                </dl>
+            </div>
+
+            <form method="post" class="formulario__acciones">
+                {% csrf_token %}
+                <a href="{% url 'inicio' %}" class="boton boton--secundario">No, volver al catálogo</a>
+                <button type="submit" class="boton boton--peligro">Sí, eliminar</button>
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock %}

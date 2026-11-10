@@ -1,0 +1,69 @@
+{% extends "catalogo/base.html" %}
+
+{% block titulo %}Contacto · Ferretería El Roble{% endblock %}
+
+{% block contenido %}
+<section class="gestion">
+    <div class="contenedor gestion__fila">
+        <nav class="migas" aria-label="Ruta">
+            <a href="{% url 'inicio' %}">Catálogo</a>
+            <span aria-hidden="true">/</span>
+            <span>Contacto</span>
+        </nav>
+
+        <div class="gestion__grid">
+            <div class="ficha">
+                {% if enviado %}
+                    <div class="confirmacion" role="status">
+                        <p class="ficha__etiqueta">Consulta recibida</p>
+                        <h1>¡Gracias, te responderemos pronto!</h1>
+                        <p>Guardamos tu mensaje. Un vendedor te contactará por correo en horario de atención.</p>
+                        <div class="formulario__acciones">
+                            <a href="{% url 'inicio' %}" class="boton boton--principal">Volver al catálogo</a>
+                        </div>
+                    </div>
+                {% else %}
+                    <header class="ficha__cabecera">
+                        <p class="ficha__etiqueta">Atención a clientes</p>
+                        <h1>¿Buscas algo en particular?</h1>
+                        <p>Cuéntanos qué necesitas y te respondemos por correo. Los campos con <span class="requerido">*</span> son obligatorios.</p>
+                    </header>
+
+                    <form method="post" class="formulario" novalidate>
+                        {% csrf_token %}
+
+                        {% if form.errors %}
+                            <div class="alerta alerta--error" role="alert">Revisa los campos marcados en rojo.</div>
+                        {% endif %}
+
+                        {% for campo in form %}
+                            <div class="campo {% if campo.errors %}campo--error{% endif %}">
+                                <label for="{{ campo.id_for_label }}">
+                                    {{ campo.label }}{% if campo.field.required %} <span class="requerido">*</span>{% endif %}
+                                </label>
+                                {{ campo }}
+                                {% if campo.help_text %}<p class="campo__ayuda">{{ campo.help_text }}</p>{% endif %}
+                                {% for error in campo.errors %}<p class="campo__mensaje">{{ error }}</p>{% endfor %}
+                            </div>
+                        {% endfor %}
+
+                        <div class="formulario__acciones">
+                            <button type="submit" class="boton boton--principal">Enviar consulta</button>
+                        </div>
+                    </form>
+                {% endif %}
+            </div>
+
+            <aside class="nota nota--contacto">
+                <p class="nota__titulo">También puedes venir</p>
+                <ul>
+                    <li>Av. Los Carrera 1450</li>
+                    <li>Lun a vie 8:30–19:00</li>
+                    <li>Sáb 9:00–14:00</li>
+                    <li>WhatsApp +56 9 0000 0000</li>
+                </ul>
+            </aside>
+        </div>
+    </div>
+</section>
+{% endblock %}

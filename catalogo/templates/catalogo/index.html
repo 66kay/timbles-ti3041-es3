@@ -8,7 +8,7 @@
             <p>Herramientas, materiales y repuestos con precio y stock al día. Revisa antes de venir o cotiza por WhatsApp.</p>
             <div class="portada__acciones">
                 <a href="#catalogo" class="boton boton--principal">Ver catálogo</a>
-                <a href="https://wa.me/56900000000" class="boton boton--linea" target="_blank" rel="noopener">Hablar con un vendedor</a>
+                <button type="button" class="boton boton--linea" popovertarget="panel-contacto">Hablar con un vendedor</button>
             </div>
         </div>
         <figure class="portada__foto">
@@ -54,6 +54,9 @@
                 {% else %}Todo el catálogo{% endif %}
             </h2>
             <p>{{ productos|length }} producto{{ productos|length|pluralize }}</p>
+            {% if user.is_staff %}
+                <a href="{% url 'crear' %}" class="boton boton--principal">Nuevo producto</a>
+            {% endif %}
         </div>
 
         <div class="grilla">
@@ -85,6 +88,12 @@
                         {% else %}
                             <a class="boton boton--avisar" target="_blank" rel="noopener"
                                href="https://wa.me/56900000000?text={{ 'Hola, avísenme cuando llegue: '|urlencode }}{{ producto.nombre|urlencode }}">Avisarme cuando llegue</a>
+                        {% endif %}
+                        {% if user.is_staff %}
+                            <div class="producto__gestion">
+                                <a href="{% url 'editar' producto.pk %}" class="enlace-gestion">Editar</a>
+                                <a href="{% url 'eliminar' producto.pk %}" class="enlace-gestion enlace-gestion--peligro">Eliminar</a>
+                            </div>
                         {% endif %}
                     </div>
                 </article>
