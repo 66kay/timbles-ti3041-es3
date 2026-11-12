@@ -70,8 +70,7 @@
 
         <p class="panel__separador"><span>o déjanos tu consulta</span></p>
 
-        {# Etapa 3: cambiar action="#" por action="{% url 'contacto' %}" cuando exista la vista #}
-        <form method="post" action="#" class="formulario">
+        <form method="post" action="{% url 'contacto' %}" class="formulario" novalidate>
             {% csrf_token %}
             <div class="campo">
                 <label for="contacto-nombre">Nombre <span class="requerido">*</span></label>
@@ -119,6 +118,7 @@
         </div>
         <div class="contenedor pie__legal">
             <p>&copy; {% now "Y" %} Ferretería El Roble. Precios en pesos chilenos, IVA incluido.</p>
+            {% if request.session.visitas %}<p>Has visitado el catálogo {{ request.session.visitas }} vez{{ request.session.visitas|pluralize:"es" }} en esta sesión.</p>{% endif %}
             <p>Fotografías: <a href="https://www.pexels.com" target="_blank" rel="noopener">Pexels</a></p>
         </div>
     </footer>

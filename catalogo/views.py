@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .forms import ProductoForm
+from .forms import ProductoForm,ConsultaForm 
 from .models import Producto
 from django.contrib.admin.views.decorators import staff_member_required
 from django.db.models import Count, Avg, Sum
@@ -16,11 +16,15 @@ def inicio(request):
     if busqueda:
         productos = productos.filter(nombre__icontains=busqueda)
 
+    visitas = request.session.get("visitas", 0) + 1
+    request.session["visitas"] = visitas
+
     contexto = {
         "productos": productos,
         "categorias": categorias,
         "categoria_actual": categoria,
         "busqueda": busqueda,
+        "visitas": visitas,
     }
     return render(request, "catalogo/index.html", contexto)
 
@@ -66,3 +70,15 @@ def reporte_categorias(request):
 def reporte_stock_critico(request):
     productos = Producto.objects.filter(stock__lte=5).order_by("stock", "nombre")
     return render(request, "catalogo/reporte_stock.html", {"productos": productos})
+
+def contacto(request):
+    enviado = False
+    if request.method == "POST":
+        form = ConsultaForm(request.POST)
+        if form.is_valid():
+            form.save()
+            enviado = True
+            form = ConsultaForm()
+    else:
+        form = ConsultaForm()
+    return render(request, "catalogo/contacto.html", {"form": form, "enviado": enviado})
