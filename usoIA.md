@@ -1,33 +1,37 @@
-# Uso de IA – ES2 · timbles-ti3041-es2
+# Uso de IA
 
-## Parte 1: Registro de consultas
+# Consulta 1 – Entorno y nuevo repositorio
 
-Consulta 1 – Poblamiento de la base de datos
-**Prompt:**
-necesito que crees los productos que son 40 con fotos, descipcion, precio, stock, etc. crea un archivo productos.json con los productos
-**Resumen de la respuesta:**  me dio un error pero pude solucionarlo al crear el .json a que estaba dentro de una carpeta y no en la raiz como deberia. pero me entrego correctamente todos los datos y los entregue como deberia
+**Prompt:** Entender el repositorio anterior de mi prueba y entender el punto hacia el que vamos, me ayudaras paso a paso como hacer las cosas para entender y me explicaras todo antes de darme una respuesta o modificar algo
 
-**Qué usé o modifiqué:**
-Cree un prompt para que me generara los productos y los guarde como json par ayo integrarlos dentro de la carpeta.
-modifique los archivos de urls, settings, views y html para que mostraran los productos correctamente con la informacion necesaria y que todo estuviera conectado correctamente
+**Respuesta:** Reviso el PDF y mi repo de la ES2. Me dio los comandos para copiar el proyecto a una carpeta nueva, crear el venv, instalar Django, migrar, crear el .gitignore y subirlo al repo nuevo.
 
-Consulta 2 – (tema)
-**Prompt:**
-creame el front end completo con imagenes y todo y me guiaras paso a paso para integrarlo con el resto del proyecto y me corrigiras o me daras ideas o pasos a seguir con un task para guiarme cn el siguiente paso. No me des codigo completo solo el paso a paso para yo poder hacerlo
-**Resumen de la respuesta:**
-Me dio los pasos a seguir para crear el front end y me corrigio al no saber colocar la ruta de estaticos y me dio pasos a seguir para solucionarlo y al final quedo como esperaba.
+# Consulta 2 – CRUD desde la web
 
-**Qué usé o modifiqué:**
-Cree los html y css necesarios y los integre con el resto del proyecto guiandome con la guia de la ia. modifique la ruta de estaticos y los css de  base, index y catalogo
+**Prompt:** Todo lenguaje o codigo que me des me debes explicar el funcionamiento completo y la finalidad de la integracion
 
-## Parte 2: Explicación del proceso
+**Respuesta:** Me dio el ProductoForm y las vistas crear, editar y eliminar con su ruta cada una. Tuve errores porque no guarde forms.py y se borro el import de Producto, lo corregimos.
 
-Primeramente inicie el proyecto djang con el notion correspondiente y luego le pedi a la ia que me ayudara con los productos para poblar la base de datos y me dio una respuesta que al final tube que corregir el formato en el que me lo entregaba para que se pudiera integrar correctamente en mi proyecto.Luego le pedi a la ia que me ayudara con el front end completo con imagenes y todo y me guiaras paso a paso para integrarlo con el resto del proyecto y me corrigieras o me dieras ideas o pasos a seguir con un task para guiarme cn el siguiente paso. No me des codigo completo solo el paso a paso para yo poder hacerlo.
+# Consulta 3 – Diseno del front (formularios y panel de contacto)
 
-me ayudo para poder subir los git ignore, readme y gitattributes y me guio para poder crear mi cuenta de github. y pude subir el proyecto a github correctamente.
+**Prompt:** Quiero que rehagas el front end entendiendo la logica del proyecto para que quede visualmente mejor que antes pero sin que sea generica
 
-**Que aprendi de esto**
+**Respuesta:** Hizo los templates del formulario, la confirmacion para eliminar y un panel de contacto con WhatsApp, usando los colores de la tienda. No se veia por el cache del CSS y lo arreglo con ?v= en el link.
 
-pude entender mejor como funciona django y como se integran las vistas con los modelos y las templates.
-tambien recorde mejor el uso de git ya que hace muchas veces e salian errores asi que me ayude para corregirlos y subirlos bien en cada etapa.
-si me senti perdido en algunos momentos tube que pedir ayuda para poder entender la logica o sintaxis de django. ya que no estaba tan fressco en la materia pero finalmente pude completar todo y quedo bien y funcional.
+# Consulta 4 – Seguridad del CRUD
+
+**Prompt:** Quiero que haya algun tipo de seguridad para que no se acceda directamente y se pueda modificar, por ende me diras exactamente como implementarlo yo
+
+**Respuesta:** Oculto los botones si no soy admin y me explico que agregara @staff_member_required a crear, editar y eliminar. Sin sesion ahora redirige al login.
+
+# Consulta 5 – Reportes con ORM
+
+**Prompt:** Necesito que me indiques paso a paso como agregar el bloque de codigo para que me funcione el ORM
+
+**Respuesta:** Reporte 1 con annotate (Count, Avg, Sum) por categoria y reporte 2 con filter(stock__lte=5) y order_by. Yo agregue las vistas y rutas, la IA los templates y el menu.
+
+# Consulta 6 – Clientes, ModelForm y sesiones
+
+**Prompt:** Me hace falta terminar el apartado de clientes con el form y sesiones para que todo quede bien configurado, ya me dio error anteriormente al intentar anadirlo directamente yo, por ende me indicaras paso a paso como agregarlo y como funcionaria
+
+**Respuesta:** Modelo ConsultaCliente, su migracion y registro en admin, ConsultaForm con validacion de largo minimo, vista contacto y contador de visitas con request.session. Puse mal la ruta y borre vistas sin querer, la IA las recupero del commit anterior.
